@@ -42,7 +42,8 @@ example/android/app/src/main/gen
 
 # build
 react-native-fast-image-*.tgz
-dist/
+# We need the dist/ folder if we install directly via GH url. 
+# dist/
 
 # coverage reports
 coverage
