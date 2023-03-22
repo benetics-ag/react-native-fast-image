@@ -120,6 +120,13 @@ export interface FastImageProps extends AccessibilityProps, ViewProps {
     tintColor?: ColorValue
 
     /**
+     * Downsample the image to the size of the view.
+     * 
+     * @platform android
+     */
+    downsample?: boolean
+
+    /**
      * A unique identifier for this element to be used in UI Automation testing scripts.
      */
     testID?: string

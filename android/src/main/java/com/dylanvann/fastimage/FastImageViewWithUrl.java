@@ -18,6 +18,7 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
+import com.bumptech.glide.load.resource.bitmap.DownsampleStrategy;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,6 +31,7 @@ class FastImageViewWithUrl extends AppCompatImageView {
     private boolean mNeedsReload = false;
     private ReadableMap mSource = null;
     private Drawable mDefaultSource = null;
+    private Boolean mDownsample = true;
 
     public GlideUrl glideUrl;
 
@@ -45,6 +47,11 @@ class FastImageViewWithUrl extends AppCompatImageView {
     public void setDefaultSource(@Nullable Drawable source) {
         mNeedsReload = true;
         mDefaultSource = source;
+    }
+
+    public void setDownsample(@Nullable Boolean downsample) {
+        mNeedsReload = true;
+        mDownsample = downsample;
     }
 
     private boolean isNullOrEmpty(final String url) {
@@ -146,6 +153,12 @@ class FastImageViewWithUrl extends AppCompatImageView {
 
             if (key != null)
                 builder.listener(new FastImageRequestListener(key));
+            
+            if (!mDownsample) {
+                builder = builder
+                    .downsample(DownsampleStrategy.NONE)
+                    .dontTransform();
+            }
 
             builder.into(this);
         }

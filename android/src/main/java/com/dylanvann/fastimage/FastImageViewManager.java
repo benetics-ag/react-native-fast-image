@@ -83,6 +83,11 @@ class FastImageViewManager extends SimpleViewManager<FastImageViewWithUrl> imple
         view.setScaleType(scaleType);
     }
 
+    @ReactProp(name = "downsample")
+    public void setDownsample(FastImageViewWithUrl view, @Nullable Boolean downsample) {
+        view.setDownsample(downsample);
+    }
+
     @Override
     public void onDropViewInstance(@NonNull FastImageViewWithUrl view) {
         // This will cancel existing requests.
